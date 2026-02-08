@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            background: #3E2F1C;
+
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        /* ========= FRONT PAGE ========= */
+        .front-page {
+            min-height: 100vh;
+            display: flex;
+            background: #2b1d18;
+            color: white;
+        }
+
+        .left-content {
+            flex: 1;
+            padding: 80px 60px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #ff6a00;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .left-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #ffbf00;
+        }
+
+        .subtitle {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .start-btn {
+            margin-top: 30px;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            background: #ffbf00;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .start-btn:hover {
+            background: #e0a800;
+        }
+
+        .right-image {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .right-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ========= FORM CARD ========= */
+        .card {
+            background-color: #ffffff;
+            border-radius: 18px;
+        }
+
+        h2 {
+            color: #3E2F1;
+            font-weight: 600;
+        }
+
+        .form-control {
+            background-color: #FFE0B2;
+            border: 1px solid #FFB84D;
+        }
+
+        .form-control:focus {
+            background-color: #ffffff;
+            border-color: #3E2F1C;
+            box-shadow: none;
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #e0a800;
+            margin-top: 15px;
+        }
+        .btn-brown {
+            background-color: #C4A484;
+            border-color: #3E2F1C;
+            color: white; /* text color */
+        }
+
+        .btn-brown:hover {
+            background-color: #C4A484 ;
+            border-color: #2b1d18;
+        }
+
+
+        #mainForm {
+            display: none;
+        }
+        .prediction-result {
+            background-color: #3E2F1C; /* Dark brown background */
+            color: #ffbf00; /* Text color for contrast */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Shadow for depth */
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .prediction-result table {
+            margin-top: 15px;
+            background-color: #ffffff; /* Keep table white for readability */
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ========= FRONT PAGE ========= -->
+<div class="front-page" id="frontPage">
+    <div class="left-content">
+        <span class="tag">MACHINE LEARNING</span>
+
+        <h1>
+            HOUSE<br>
+            PRICE<br>
+            PREDICTION
+        </h1>
+
+        <p class="subtitle">PROJECT BY: G.CHAITHANYA</p>
+
+        <button class="start-btn" onclick="startProject()">
+            🚀 START
+        </button>
+    </div>
+
+    <div class="right-image">
+        <!-- put your image in static folder -->
+      <img src="{{ url_for('static', filename='price-prediction-course-image.png') }}"
+     alt="House Price Prediction"
+     width="400">
+
+
+    </div>
+</div>
+
+<!-- ========= MAIN FORM ========= -->
+<div class="container mt-5" id="mainForm">
+    <div class="card p-4 shadow-lg">
+        <h2 class="text-center mb-4">🏠 House Price Prediction</h2>
+
+        <form action="/predict" method="POST">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="number" name="bedrooms" class="form-control form-control-sm" placeholder="Bedrooms" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="number" step="0.5" name="bathrooms" class="form-control form-control-sm" placeholder="Bathrooms" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="number" name="sqft_living" class="form-control form-control-sm" placeholder="Sqft Living" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="number" name="sqft_lot" class="form-control form-control-sm" placeholder="Sqft Lot" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="number" name="floors" class="form-control form-control-sm" placeholder="Floors" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="number" name="waterfront" class="form-control form-control-sm" placeholder="Waterfront" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="number" name="view" class="form-control form-control-sm" placeholder="View" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="number" name="condition" class="form-control form-control-sm" placeholder="Condition" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="number" name="sqft_above" class="form-control form-control-sm" placeholder="Sqft Above" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="number" name="sqft_basement" class="form-control form-control-sm" placeholder="Sqft Basement" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="number" name="yr_built" class="form-control form-control-sm" placeholder="Year Built" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="number" name="yr_renovated" class="form-control form-control-sm" placeholder="Year Renovated (0 if none)" required>
+                </div>
+            </div>
+
+            <!-- DAY / MONTH / YEAR -->
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <input type="number" name="day" class="form-control form-control-sm" placeholder="Day" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="number" name="month" class="form-control form-control-sm" placeholder="Month" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="number" name="year" class="form-control form-control-sm" placeholder="Year" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="number" name="city" class="form-control form-control-sm" placeholder="City (Encoded)" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="number" name="country" class="form-control form-control-sm" placeholder="Country (Encoded)" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-brown btn-block">
+                Predict Price
+            </button>
+        </form>
+
+        {% if prediction_text %}
+        <hr>
+        <div class="prediction-result text-center">
+            <h4 class="text-success">📊 Prediction Result</h4>
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th>Predicted Price</th>
+                    <td><strong>{{ prediction_text }}</strong></td>
+                </tr>
+            </table>
+        </div>
+        {% endif %}
+
+
+
+
+    </div>
+</div>
+
+<script>
+    function startProject() {
+        document.getElementById("frontPage").style.display = "none";
+        document.getElementById("mainForm").style.display = "block";
+    }
+
+    // If there's a prediction, show the form automatically
+    window.onload = function() {
+        {% if prediction_text %}
+            document.getElementById("frontPage").style.display = "none";
+            document.getElementById("mainForm").style.display = "block";
+        {% endif %}
+    }
+</script>
+
+</body>
+</html>
