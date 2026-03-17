@@ -1,409 +1,148 @@
-# 🏠 House Price Prediction using Linear Regression
-
-![Python](https://img.shields.io/badge/Python-3.10+-blue)
-![Flask](https://img.shields.io/badge/Flask-Web%20App-green)
-![Machine Learning](https://img.shields.io/badge/Machine-Learning-orange)
-![Status](https://img.shields.io/badge/Project-Completed-brightgreen)
-
----
-
-## 📌 Abstract
-
-House price prediction is an important application of machine learning that helps buyers, sellers, and real estate professionals make informed decisions. Property prices depend on various factors such as location, area, number of bedrooms, number of bathrooms, and construction year.
-
-This project develops a **House Price Prediction System using Linear Regression implemented from scratch**.
-
-The project includes:
-
-- Data Collection  
-- Data Preprocessing  
-- Feature Engineering  
-- Manual Linear Regression Implementation  
-- Model Evaluation  
-- Flask Web Deployment  
-
-The model is evaluated using:
-
-- Mean Absolute Error (MAE)  
-- Mean Squared Error (MSE)  
-- Root Mean Squared Error (RMSE)  
-- R² Score  
-
-The trained model is deployed using a **Flask-based web application** for real-time house price prediction.
-
----
-
-# 📖 Table of Contents
-
-1. Introduction  
-2. Problem Statement  
-3. Objectives  
-4. Scope  
-5. System Requirements  
-6. Dataset Description  
-7. Methodology  
-8. System Architecture  
-9. Implementation  
-10. Results and Analysis  
-11. Output  
-12. Advantages  
-13. Limitations  
-14. Future Enhancements  
-15. Conclusion  
-16. References  
-
----
-
-# 1. Introduction
-
-The real estate industry requires accurate house price estimation systems. Manual price estimation methods are:
-
-- ❌ Time-consuming  
-- ❌ Inconsistent  
-- ❌ Error-prone  
-
-Machine learning enables automated price prediction by analyzing historical housing data.
-
-This project builds a **Multiple Linear Regression model manually using NumPy and SVD**, and deploys it using Flask.
-
----
-
-# 2. Problem Statement
-
-Determining house prices manually is complex due to multiple influencing factors:
-
-- Location  
-- Property size  
-- Number of bedrooms  
-- Bathrooms  
-- Construction year  
-- Market trends  
-
-There is a need for an automated system that:
-
-- Learns from historical data  
-- Predicts prices accurately  
-- Provides real-time predictions  
-- Is simple and interpretable  
-
----
-
-# 3. Objectives
-
-- Analyze historical housing data  
-- Perform data preprocessing  
-- Implement Linear Regression from scratch  
-- Evaluate model using regression metrics  
-- Develop a Flask web application  
-- Provide real-time house price predictions  
-
----
-
-# 4. Scope of the Project
-
-✔ Predict house prices using Linear Regression  
-✔ Use structural and location-based features  
-✔ Implement full ML workflow  
-✔ Deploy using Flask  
-
-Limitations:
-
-- Assumes linear relationship  
-- Does not include real-time market data  
-- Designed mainly for educational purposes  
-
----
-
-# 5. System Requirements
-
-##  Hardware
-
-- Processor: Intel i3 or higher  
-- RAM: Minimum 4GB (8GB recommended)  
-- Storage: 10GB free space  
-- 64-bit architecture  
-
-##  Software
-
-- Python 3.10+
-- Flask
-- NumPy
-- Pandas
-- Scikit-learn (for train-test split)
-- Pickle / Joblib
-- Gunicorn (deployment)
-- HTML, CSS (Frontend)
-
----
-
-# 6. Dataset Description
-
-- 📊 4600 Rows  
-- 📈 18 Columns  
-- 🎯 Target Variable: `price`  
-
-## Important Features:
-
-- bedrooms  
-- bathrooms  
-- sqft_living  
-- sqft_lot  
-- floors  
-- waterfront  
-- view  
-- condition  
-- sqft_above  
-- sqft_basement  
-- yr_built  
-- yr_renovated  
-- city (encoded)  
-- country (encoded)  
-- year, month, day  
-
-Dataset split:
-
-- 80% Training  
-- 20% Testing  
-
----
-
-# 7. Methodology
-
-## 7.1 Data Collection
-
-Housing dataset collected in CSV format containing historical sales records.
-
----
-
-## 7.2 Data Preprocessing
-
-- Removed unnecessary columns (`street`, `statezip`)
-- Converted `date` column into:
-  - year
-  - month
-  - day
-- Encoded categorical variables:
-  - country → USA = 1, others = 0
-  - city → Manual label encoding
-- Separated:
-  - X → Features
-  - y → Target (price)
-- Train-test split (80:20)
-
----
-
-## 7.3 Feature Selection
-
-Selected meaningful attributes affecting house price to:
-
-- Reduce model complexity
-- Improve interpretability
-- Enhance computational efficiency
-
----
-
-## 7.4 Model Development (Linear Regression using SVD)
-
-Model implemented manually using NumPy.
-
-### Steps:
-
-1. Convert data to NumPy arrays  
-2. Mean centering  
-3. Apply Singular Value Decomposition  
-4. Compute pseudo-inverse  
-5. Calculate regression coefficients  
-6. Compute intercept  
-
----
-
-## 7.5 Evaluation Metrics
-
-### 📌 Mean Squared Error (MSE)
-
-```math
-MSE = (1/n) Σ (yi - ŷi)²
-```
-
-### 📌 Root Mean Squared Error (RMSE)
-
-```math
-RMSE = √MSE
-```
-
-### 📌 Mean Absolute Error (MAE)
-
-```math
-MAE = (1/n) Σ |yi - ŷi|
-```
-
-### 📌 R² Score
-
-```math
-R² = 1 - (SS_res / SS_total)
-```
-
----
-
-# 8. System Architecture
-
-### 🔹 Dataset Layer  
-Raw housing dataset (CSV)
-
-### 🔹 Preprocessing Layer  
-Cleaning, encoding, feature engineering
-
-### 🔹 Model Training Layer  
-Manual Linear Regression using SVD
-
-### 🔹 Model Storage Layer  
-Model saved as `.pkl` file
-
-### 🔹 Web Application Layer  
-Flask backend + HTML frontend
-
-### 🔹 Prediction Output Layer  
-Predicted price displayed to user
-
----
-
-# 9. Implementation
-
-## 🔹 Model Training
-
-- Load dataset
-- Preprocess data
-- Train regression model
-- Save model using Pickle
-
-## 🔹 Model Testing
-
-- Predict on unseen test data
-- Calculate MSE, RMSE, MAE, R²
-
-## 🔹 Flask Integration
-
-- User enters house details
-- Backend preprocesses input
-- Model predicts price
-- Result displayed instantly
-
----
-
-# 10. Results and Analysis
-
-## 📊 Training Results
-
-- Low MSE
-- Acceptable RMSE
-- Good MAE
-- R² ≈ 0.55  
-
-Model explains ~55% of variance in training data.
-
----
-
-## 📊 Testing Results
-
-- Metrics close to training results  
-- No significant overfitting  
-- Good generalization ability  
-
----
-
-# 11. Output
-
-### ✔ Dataset Overview
-- 4600 rows
-- 18 columns
-
-### ✔ Training Metrics
-Model successfully learned relationships between features and prices.
-
-### ✔ Testing Metrics
-Model performs well on unseen data.
-
-### ✔ Sample Prediction
-System predicts house price for new inputs.
-
-### ✔ Flask Web Application
-- User-friendly interface
-- Real-time prediction
-- Integrated trained model
-
----
-
-# 12. Advantages
-
-- Automated price prediction  
-- Simple & interpretable model  
-- Low computational cost  
-- Fast predictions  
-- End-to-end ML pipeline  
-- Easy to maintain  
-
----
-
-# 13. Limitations
-
-- Assumes linear relationship  
-- Cannot capture complex nonlinear patterns  
-- Sensitive to outliers  
-- Limited scalability  
-- Accuracy depends on dataset quality  
-
----
-
-# 14. Future Enhancements
-
-- Implement Random Forest  
-- Implement Gradient Boosting  
-- Add Neural Networks  
-- Include Latitude & Longitude features  
-- Deploy on AWS / Azure / GCP  
-- Add Dashboard & Visualizations  
-- Continuous model retraining  
-
----
-
-# 15. Conclusion
-
-The House Price Prediction System demonstrates the practical implementation of machine learning in the real estate domain.
-
-The project includes:
-
-- Complete data preprocessing  
-- Manual regression implementation  
-- Model evaluation  
-- Flask-based deployment  
-
-It serves as a strong foundation for understanding end-to-end machine learning workflows.
-
----
-
-# 16. References
-
-1. Kaggle – House Price Dataset  
-   https://www.kaggle.com  
-
-2. Scikit-learn Documentation  
-   https://scikit-learn.org  
-
-3. Python Documentation  
-   https://docs.python.org  
-
-4. Flask Documentation  
-   https://flask.palletsprojects.com  
-
-5. Tom M. Mitchell – *Machine Learning*, McGraw-Hill  
-
----
-
-# 👩‍💻 Author
-
-**G. Chaithanya**  
-
-
----
-
-⭐ If you found this project useful, consider giving it a star!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+</head>
+<body>
+
+    <h1>🏠 House Price Prediction Web App</h1>
+
+    <h2>📌 Project Overview</h2>
+    <p>
+        This project is an end-to-end Machine Learning web application that predicts house prices 
+        based on various property features. The model is trained on real-world housing data and 
+        deployed using Flask, enabling users to get real-time predictions through a simple and 
+        interactive web interface.
+    </p>
+
+    <h2>📊 Dataset Information</h2>
+    <ul>
+        <li><strong>Dataset:</strong> House Sales in King County, USA</li>
+        <li><strong>Total Records:</strong> 21,613</li>
+        <li><strong>Time Period:</strong> May 2014 – May 2015</li>
+    </ul>
+
+    <h3>🔑 Features Used</h3>
+    <ul>
+        <li>Bedrooms, Bathrooms</li>
+        <li>Sqft Living, Sqft Lot</li>
+        <li>Floors, Waterfront, View</li>
+        <li>Condition</li>
+        <li>Sqft Above, Sqft Basement</li>
+        <li>Year Built, Year Renovated</li>
+        <li>City (Encoded), Country (Encoded)</li>
+        <li>Year, Month, Day</li>
+    </ul>
+
+    <h2>⚙️ Tech Stack</h2>
+    <ul>
+        <li><strong>Backend:</strong> Python, Flask</li>
+        <li><strong>Machine Learning:</strong> Scikit-learn, NumPy, Pandas</li>
+        <li><strong>Frontend:</strong> HTML, CSS</li>
+        <li><strong>Deployment:</strong> Render</li>
+        <li><strong>Version Control:</strong> GitHub</li>
+    </ul>
+
+    <h2>🔄 Project Workflow</h2>
+
+    <h3>1. Data Preprocessing</h3>
+    <ul>
+        <li>Handled missing values</li>
+        <li>Extracted date features (year, month, day)</li>
+        <li>Encoded categorical variables</li>
+        <li>Split dataset into training (80%) and testing (20%)</li>
+    </ul>
+
+    <h3>2. Model Training</h3>
+    <ul>
+        <li>Used Linear Regression algorithm</li>
+        <li>Evaluation Metrics:
+            <ul>
+                <li>R² Score</li>
+                <li>Mean Squared Error (MSE)</li>
+                <li>Root Mean Squared Error (RMSE)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>3. Model Saving</h3>
+    <ul>
+        <li>Saved the trained model using pickle (.pkl)</li>
+    </ul>
+
+    <h3>4. Web Application</h3>
+    <ul>
+        <li>User inputs house details through UI</li>
+        <li>Flask processes input data</li>
+        <li>Model predicts and returns price</li>
+    </ul>
+
+    <h2>🚀 Deployment</h2>
+    <p><strong>Platform:</strong> Render</p>
+
+    <h3>Run Locally</h3>
+    <pre>
+pip install -r requirements.txt
+python app.py
+    </pre>
+
+    <h3>Production Command</h3>
+    <pre>
+gunicorn app:app
+    </pre>
+
+    <h2>🔍 Sample Prediction</h2>
+
+    <h3>Input:</h3>
+    <ul>
+        <li>Bedrooms: 2</li>
+        <li>Bathrooms: 2</li>
+        <li>Sqft Living: 300</li>
+        <li>Sqft Lot: 500</li>
+        <li>Floors: 3</li>
+        <li>Waterfront: 0</li>
+        <li>View: 2</li>
+        <li>Condition: 4</li>
+        <li>Sqft Above: 250</li>
+        <li>Sqft Basement: 50</li>
+        <li>Year Built: 2000</li>
+        <li>Year Renovated: 0</li>
+        <li>Day: 15</li>
+        <li>Month: 6</li>
+        <li>Year: 2014</li>
+        <li>City (Encoded): 3</li>
+        <li>Country (Encoded): 1</li>
+    </ul>
+
+    <h3>Output:</h3>
+    <p><strong>➡️ Estimated Price: 417,322.15</strong></p>
+
+    <h2>⚠️ Challenges Faced</h2>
+    <ul>
+        <li>Encoding categorical variables</li>
+        <li>Handling frontend form inputs</li>
+        <li>Model serialization using pickle</li>
+        <li>Deployment issues</li>
+    </ul>
+
+    <h2>🔮 Future Enhancements</h2>
+    <ul>
+        <li>Implement advanced models (Random Forest, XGBoost)</li>
+        <li>Add data visualization dashboard</li>
+        <li>Store prediction history</li>
+        <li>Docker deployment</li>
+    </ul>
+
+    <h2>📌 Conclusion</h2>
+    <p>
+        This project demonstrates a complete Machine Learning pipeline, from data preprocessing 
+        and model building to deployment. It shows how ML models can be integrated into web 
+        applications for real-time predictions.
+    </p>
+
+</body>
+</html>
+
+ 
