@@ -11,7 +11,7 @@
 
 House price prediction is an important application of machine learning that helps buyers, sellers, and real estate professionals make informed decisions. Property prices depend on various factors such as location, area, number of bedrooms, number of bathrooms, and construction year.
 
-This project develops a **House Price Prediction System using Linear Regression implemented from scratch using SVD (Singular Value Decomposition)**.
+This project develops a **House Price Prediction System using Linear Regression implemented from scratch**.
 
 The project includes:
 
